@@ -36,10 +36,6 @@ FILECAPS=(
 	CAP_NET_RAW				usr/sbin/bird
 )
 
-PATCHES=(
-	"${FILESDIR}/${P}-musl-tests.patch"
-)
-
 src_prepare() {
 	default
 	eautoreconf
