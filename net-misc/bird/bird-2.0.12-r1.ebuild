@@ -45,6 +45,11 @@ src_configure() {
 	# This export makes compilation and test phases verbose
 	export VERBOSE=1
 
+	local protocols="bfd babel bgp mrt ospf perf pipe radv rip rpki static"
+	if use bmp; then
+		protocols="${protocols} bmp"
+	fi
+
 	local myargs=(
 		--localstatedir="${EPREFIX}/var"
 		$(use_enable client)
