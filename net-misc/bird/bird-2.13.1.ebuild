@@ -12,7 +12,7 @@ LICENSE="GPL-2"
 
 SLOT="0"
 KEYWORDS="amd64 ~arm64 ~x86 ~x64-macos"
-IUSE="+client custom-cflags debug libssh"
+IUSE="bmp +client custom-cflags debug libssh"
 
 RDEPEND="
 	client? (
@@ -46,12 +46,14 @@ src_configure() {
 	export VERBOSE=1
 
 	local protocols="bfd babel bgp mrt ospf perf pipe radv rip rpki static"
+	protocols="bfd babel bgp mrt ospf perf pipe radv rip rpki static"
 	if use bmp; then
 		protocols="${protocols} bmp"
 	fi
 
 	local myargs=(
 		--localstatedir="${EPREFIX}/var"
+		--with-protocols="${protocols}"
 		$(use_enable client)
 		$(use_enable debug)
 		$(use_enable libssh)
